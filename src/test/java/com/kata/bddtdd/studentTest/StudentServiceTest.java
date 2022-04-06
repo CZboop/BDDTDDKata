@@ -1,5 +1,8 @@
-package com.kata.bddtdd;
+package com.kata.bddtdd.studentTest;
 
+import com.kata.bddtdd.student.Student;
+import com.kata.bddtdd.student.StudentDatabase;
+import com.kata.bddtdd.student.StudentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,15 +15,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class StudentAPITest {
+class StudentServiceTest {
 
-    private StudentAPI studentAPI;
+    private StudentService studentService;
     private StudentDatabase mockStudentDatabase;
 
     @BeforeEach
     void setUp() {
         mockStudentDatabase = mock(StudentDatabase.class);
-        studentAPI = new StudentAPI(mockStudentDatabase);
+        studentService = new StudentService(mockStudentDatabase);
     }
 
     @Test
@@ -32,7 +35,7 @@ class StudentAPITest {
         when(mockStudentDatabase.getStudentDetailsFromDB(namePrefix)).thenReturn(asList(mockData));
 
         //Action
-        List<Student> actualStudentData = studentAPI.getStudentDetails(namePrefix);
+        List<Student> actualStudentData = studentService.getStudentDetails(namePrefix);
 
         //Assertion
         assertAll("actualStudentData",

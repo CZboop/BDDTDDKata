@@ -1,4 +1,4 @@
-package com.kata.bddtdd;
+package com.kata.bddtdd.student;
 
 public class Student {
     private String firstName;
