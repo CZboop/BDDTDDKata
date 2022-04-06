@@ -21,4 +21,9 @@ public class StudentController {
     public List<Student> getStudentDetails(@PathVariable String namePrefix) {
         return studentService.getStudentDetails(namePrefix);
     }
+
+    @GetMapping("/searchbylastname/{lastName}")
+    public Student getStudentWithExactLastName(@PathVariable String lastName) {
+        return studentService.getStudentWithExactLastName(lastName);
+    }
 }

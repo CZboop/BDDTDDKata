@@ -4,6 +4,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -31,7 +33,13 @@ public class StudentDatabase {
 
     public List<Student> getStudentDetailsFromDB(String namePrefix) {
         return studentList.stream().filter(
-                studentDetails -> studentDetails.getFirstName().startsWith(namePrefix)
+                studentDetails -> studentDetails.getFirstName().toLowerCase().startsWith(namePrefix)
         ).collect(Collectors.toList());
+    }
+
+    public Optional<Student> getStudentExactMatch(String lastName) {
+        return studentList.stream().filter(
+                studentDetails -> studentDetails.getLastName().toLowerCase() == lastName
+        ).findFirst();
     }
 }

@@ -13,6 +13,10 @@ public class StudentService {
     }
 
     public List<Student> getStudentDetails(String namePrefix) {
-        return studentDatabase.getStudentDetailsFromDB(namePrefix);
+        return studentDatabase.getStudentDetailsFromDB(namePrefix.toLowerCase());
+    }
+
+    public Student getStudentWithExactLastName(String lastName) {
+        return studentDatabase.getStudentExactMatch(lastName.toLowerCase()).orElseThrow(new RuntimeException("Not found"));
     }
 }
