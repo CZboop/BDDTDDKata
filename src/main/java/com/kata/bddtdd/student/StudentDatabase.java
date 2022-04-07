@@ -33,13 +33,13 @@ public class StudentDatabase {
 
     public List<Student> getStudentDetailsFromDB(String namePrefix) {
         return studentList.stream().filter(
-                studentDetails -> studentDetails.getFirstName().toLowerCase().startsWith(namePrefix)
+                studentDetails -> studentDetails.getFirstName().toLowerCase().startsWith(namePrefix.toLowerCase())
         ).collect(Collectors.toList());
     }
 
-    public Optional<Student> getStudentExactMatch(String lastName) {
+    public Student getStudentExactMatch(String lastName) {
         return studentList.stream().filter(
-                studentDetails -> studentDetails.getLastName().toLowerCase() == lastName
-        ).findFirst();
+                studentDetails -> studentDetails.getLastName().toLowerCase().equals(lastName.toLowerCase())
+        ).findFirst().get();
     }
 }

@@ -43,4 +43,42 @@ class StudentServiceTest {
                 () -> assertEquals("rajput", actualStudentData.get(0).getLastName())
         );
     }
+
+    @Test
+    void getStudentDetailsFromDB_ShouldBeCaseInsensitive(){
+        //Arrange
+        String namePrefix = "A";
+        Student mockData = new Student("abhishek", "rajput");
+        when(mockStudentDatabase.getStudentDetailsFromDB(namePrefix)).thenReturn(asList(mockData));
+
+        //Action
+        List<Student> actualStudentData = studentService.getStudentDetails(namePrefix);
+
+        //Assertion
+        assertAll("actualStudentData",
+                () -> assertEquals("abhishek", actualStudentData.get(0).getFirstName()),
+                () -> assertEquals("rajput", actualStudentData.get(0).getLastName())
+        );
+    }
+
+    @Test
+    void getStudentDetailsFromDB_ExactMatch(){
+        //Arrange
+        String name = "RaJpUt";
+        Student mockData = new Student("abhishek", "rajput");
+        when(mockStudentDatabase.getStudentDetailsFromDB(name)).thenReturn(asList(mockData));
+
+        //Action
+        List<Student> actualStudentData = studentService.getStudentDetails(name);
+
+        //Assertion
+        assertAll("actualStudentData",
+                () -> assertEquals("abhishek", actualStudentData.get(0).getFirstName()),
+                () -> assertEquals("rajput", actualStudentData.get(0).getLastName())
+        );
+
+    }
+
+
+
 }
