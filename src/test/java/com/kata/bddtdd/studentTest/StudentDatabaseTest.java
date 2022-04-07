@@ -40,4 +40,30 @@ class StudentDatabaseTest {
                 () -> assertEquals("novita", actualStudentData.get(0).getFirstName())
         );
     }
+
+    @Test
+    void getStudentDetailsFromDB_ShouldBeCaseInsensitive(){
+        String namePrefix = "N";
+
+        List<Student> actualStudentData = studentDatabase.getStudentDetailsFromDB(namePrefix);
+
+        assertAll("actualStudentData",
+                () -> assertEquals("novita", actualStudentData.get(0).getFirstName())
+        );
+    }
+
+    @Test
+    void getStudentDetailsFromDB_ExactMatch(){
+        String name = "RaJpUt";
+
+        Student actualStudentData = studentDatabase.getStudentExactMatch(name);
+
+        assertAll("actualStudentData",
+                () -> assertEquals("rajput", actualStudentData.getLastName())
+        );
+    }
+
+
+
+
 }
